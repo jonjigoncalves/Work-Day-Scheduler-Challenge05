@@ -20,13 +20,16 @@ $(function () {
         else{
             colorKey="future"
         }
+        // slecect each element and back the jquery classes so that we can format them to look right. so that we can loop them and also update the timestamp hour
         var rowDiv = $('<div>').addClass('row time-block '+colorKey).attr('id', i);
         var hourDiv = $('<div>').addClass('col-2 col-md-1 hour text-center py-3').text(i>12?i-12:i);
         var textArea = $('<textarea>').addClass('col-8 col-md-10 description').attr('rows', '3').val(localStorage.getItem(i))
         var button = $('<button>')
         .addClass('btn saveBtn col-2 col-md-1')
         .attr('aria-label', 'save')
+        // also had to the button an eventlistener which in jquery is .on
         .on('click',function(){
+            // 
             var hourKey = $(this)
             .parent()
             .attr('id'); 
@@ -42,6 +45,8 @@ $(function () {
         $('.container-lg').append(rowDiv.append(hourDiv, textArea, button.append(icon)))
     }
 });
+// create a var for the current date with dayjs.
+// remeber that when trying to reference the day #, you have to use the capital d, little d references the #index with sunday being 0.
 var currentDate = dayjs().format('dddd, MMMM D, YYYY');
 $('#currentDay').text(currentDate);
 
